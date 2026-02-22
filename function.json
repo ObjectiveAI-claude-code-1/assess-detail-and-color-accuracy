@@ -1,0 +1,114 @@
+{
+  "type": "scalar.function",
+  "input_schema": {
+    "type": "object",
+    "description": "A single cat photo with its URL and optional metadata",
+    "properties": {
+      "url": {
+        "type": "string",
+        "description": "The URL or file path to the cat photo image"
+      },
+      "title": {
+        "type": "string",
+        "description": "An optional title or label for the photo"
+      },
+      "photographer": {
+        "type": "string",
+        "description": "An optional credit to the photographer"
+      }
+    },
+    "required": [
+      "url"
+    ]
+  },
+  "tasks": [
+    {
+      "type": "vector.completion",
+      "messages": {
+        "$starlark": "[\n  {\n    'role': 'user',\n    'content': [\n      {\n        'type': 'text',\n        'text': 'Examine the fine details in this cat photograph carefully. How clearly and distinctly are fine details like individual hairs, whisker definition, eye clarity, nose texture, and paw pads rendered?'\n      },\n      {\n        'type': 'image_url',\n        'image_url': {\n          'url': input['url'],\n          'detail': 'high'\n        }\n      }\n    ]\n  }\n]"
+      },
+      "responses": [
+        [
+          {
+            "type": "text",
+            "text": "The fine details are rendered with excellent sharpness and clarity. Individual hairs, whisker definition, eye details, nose texture, and paw pads are all distinctly visible and well-defined, allowing full appreciation of the subject."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The fine details are generally clear, though some areas could be sharper. Most important features like whiskers and eyes are visible, but overall detail clarity could be improved."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "Many fine details appear blurred or soft. Critical features lack sufficient clarity, and the viewer's ability to appreciate the subject's character is compromised."
+          }
+        ]
+      ],
+      "output": {
+        "$starlark": "output['scores'][0] * 1.0 + output['scores'][1] * 0.5 + output['scores'][2] * 0.0"
+      }
+    },
+    {
+      "type": "vector.completion",
+      "messages": {
+        "$starlark": "[\n  {\n    'role': 'user',\n    'content': [\n      {\n        'type': 'text',\n        'text': 'Evaluate the colors in this cat photograph. Do the colors appear natural and true to life? Are there any unnatural color casts, oversaturation, or color distortion?'\n      },\n      {\n        'type': 'image_url',\n        'image_url': {\n          'url': input['url'],\n          'detail': 'high'\n        }\n      }\n    ]\n  }\n]"
+      },
+      "responses": [
+        [
+          {
+            "type": "text",
+            "text": "The colors appear natural and accurate throughout the photograph. The cat's coat, eyes, and environmental colors are rendered truthfully without unnatural casts, oversaturation, or distortion. The colors faithfully represent what would be seen in person."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The colors are mostly natural, though some areas show minor issues. There may be slight color casts or minor oversaturation in places, but the overall color accuracy is good enough to convey the subject authentically."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The colors appear distorted with unnatural casts, oversaturation, or desaturation. These color issues misrepresent the subject and diminish the viewer's ability to see the cat's true appearance."
+          }
+        ]
+      ],
+      "output": {
+        "$starlark": "output['scores'][0] * 1.0 + output['scores'][1] * 0.5 + output['scores'][2] * 0.0"
+      }
+    },
+    {
+      "type": "vector.completion",
+      "messages": {
+        "$starlark": "[\n  {\n    'role': 'user',\n    'content': [\n      {\n        'type': 'text',\n        'text': 'Consider this photograph as a whole. How faithfully does it capture and represent the cat\\'s appearance and character? Does it provide an honest, authentic representation of the subject without significant artifacts or distortion?'\n      },\n      {\n        'type': 'image_url',\n        'image_url': {\n          'url': input['url'],\n          'detail': 'high'\n        }\n      }\n    ]\n  }\n]"
+      },
+      "responses": [
+        [
+          {
+            "type": "text",
+            "text": "The photograph provides a faithful, honest representation of the cat's appearance and character. All elements work together seamlessly—detail clarity, color accuracy, and natural appearance—creating a convincing visual record that allows genuine appreciation of the subject."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The photograph captures the cat reasonably well and is mostly authentic. While most elements are good, there are some minor issues in detail clarity, color accuracy, or processing that slightly detract from its overall truthfulness."
+          }
+        ],
+        [
+          {
+            "type": "text",
+            "text": "The photograph has significant issues that undermine its credibility as a truthful representation. Problems with detail, color, or artifacts are substantial enough that the viewer cannot fully trust the photograph to show the subject authentically."
+          }
+        ]
+      ],
+      "output": {
+        "$starlark": "output['scores'][0] * 1.0 + output['scores'][1] * 0.5 + output['scores'][2] * 0.0"
+      }
+    }
+  ],
+  "description": "Evaluates the photographic integrity of cat images by assessing fine detail clarity and color accuracy. Examines whether details are rendered sharply, colors appear natural, and the overall photograph faithfully represents the cat's true appearance. Returns a scalar score indicating how truthfully the photograph captures its subject."
+}

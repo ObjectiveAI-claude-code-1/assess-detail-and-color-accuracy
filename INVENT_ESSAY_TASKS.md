@@ -1,0 +1,8 @@
+Task 1: Examine Fine Detail Clarity
+Assess the sharpness and distinctness of fine details throughout the photograph. Evaluate whether individual hairs, whisker definition, eye clarity, nose texture, and paw pad details are rendered with clarity and precision. Determine if these micro-features are visible and well-defined enough for the viewer to appreciate the cat's character and physical presence. Consider whether any critical details are blurred, soft, or lost entirely.
+
+Task 2: Evaluate Color Accuracy and Naturalness
+Examine the color reproduction across the entire photograph to determine whether colors appear natural and true to life. Assess whether the cat's coat color, eye color, and environmental colors reflect what would actually be seen. Identify any unnatural color casts, excessive saturation, desaturation, or color distortions that would mislead or distract the viewer. Ensure the colors convey the authentic appearance of the subject without enhancement or artificial manipulation.
+
+Task 3: Assess Overall Visual Fidelity and Faithfulness
+Evaluate the photograph as a whole to determine its overall faithfulness in capturing the subject. Determine whether the photograph succeeds in presenting an honest, natural representation of the moment without artifacts, distortions, or processing that would undermine its credibility. Consider how well all elements work together—detail clarity, color accuracy, and natural appearance—to create a truthful visual record that allows the viewer to genuinely appreciate the cat's appearance.
